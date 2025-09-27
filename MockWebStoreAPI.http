@@ -1,0 +1,6 @@
+@MockWebStoreAPI_HostAddress = http://localhost:5018
+
+GET {{MockWebStoreAPI_HostAddress}}/weatherforecast/
+Accept: application/json
+
+###
