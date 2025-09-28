@@ -8,11 +8,11 @@ namespace MockWebStoreAPI.DataModels
 
         public int     Id          { get; private set; }
         [Required]
-        public string  Name        { get;         set; } = "";
+        public string  Name        { get; private set; } = "";
         public string? Description { get;         set; }
         public bool    IsActive    { get;         set; }
 
-        private Product()
+        protected Product()
         {
         }
 
