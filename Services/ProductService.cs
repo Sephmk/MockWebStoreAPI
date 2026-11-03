@@ -26,5 +26,18 @@ namespace MockWebStoreAPI.Services
 
             return result;
         }
+
+        public async Task<List<ProductDto>> GetAllProductsByCategoryAsync(ProductDtoCategory category)
+        {
+            // IEnumerable<Product> allows covariant assignment from derived list types (List<WeaponProduct>, List<ArmourProduct>, etc)
+            IEnumerable<Product> products = category switch
+            {
+                ProductDtoCategory.Weapon => await _dbContext.Products.OfType<WeaponProduct>().ToListAsync(),
+                ProductDtoCategory.Armour => await _dbContext.Products.OfType<ArmourProduct>().ToListAsync(),
+                _ => throw new ArgumentException("Unknown category")
+            };
+            
+            return products.Select(p => ProductDto.FromEntity(p)).ToList();
+        }
     }
 }
